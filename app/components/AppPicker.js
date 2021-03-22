@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import AppButton from "./AppButton";
 import AppText from "./AppText";
 import Screen from "./Screen";
 import PickerItem from "./PickerItem";
@@ -16,6 +17,7 @@ import defaultStyles from "../config/styles";
 function AppPicker({
 	icon,
 	items,
+	numberOfColumns = 1,
 	placeholder,
 	onSelectItem,
 	PickerItemComponent = PickerItem,
@@ -49,12 +51,14 @@ function AppPicker({
 			</TouchableWithoutFeedback>
 			<Modal visible={modalVisible} animationType="slide">
 				<Screen>
-					<Button title="Close" onPress={() => setModalVisible(false)} />
+					<AppButton title="Close" onPress={() => setModalVisible(false)} />
 					<FlatList
 						data={items}
 						keyExtractor={(item) => item.value.toString()}
+						numColumns={numberOfColumns}
 						renderItem={({ item }) => (
 							<PickerItemComponent
+								item={item}
 								label={item.label}
 								onPress={() => {
 									setModalVisible(false);
