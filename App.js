@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import Screen from "./app/components/Screen";
 
 export default function App() {
+	const [imageUri, setImageUri] = useState();
+
 	const requestPermissions = async () => {
 		const { granted } = await ImagePicker.requestCameraPermissionsAsync();
 		if (!granted) {
@@ -14,5 +16,21 @@ export default function App() {
 		requestPermissions();
 	}, []);
 
-	return <Screen></Screen>;
+	const selectImage = async () => {
+		try {
+			const result = await ImagePicker.launchImageLibraryAsync();
+			if (!result.cancelled) {
+				setImageUri(result.uri);
+			}
+		} catch (err) {
+			console.log("Error rendering an image", err);
+		}
+	};
+
+	return (
+		<Screen>
+			<Button title="Select Image" onPress={selectImage} />
+			<Image source={{ uri: imageUri }} style={{ width: 200, height: 200 }} />
+		</Screen>
+	);
 }
