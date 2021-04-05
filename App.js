@@ -1,22 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import Screen from "./app/components/Screen";
 import ImageInput from "./app/components/ImageInput";
-import { Button, Text, Image } from "react-native";
 
 export default function App() {
 	const [imageUri, setImageUri] = useState();
-
-	const requestPermissions = async () => {
-		const { granted } = await ImagePicker.requestCameraPermissionsAsync();
-		if (!granted) {
-			alert("You need to enable permission to access the library");
-		}
-	};
-
-	useEffect(() => {
-		requestPermissions();
-	}, []);
 
 	const selectImage = async () => {
 		try {
@@ -31,9 +19,10 @@ export default function App() {
 
 	return (
 		<Screen>
-			<Button title="Select Image" onPress={selectImage} />
-			<Image source={{ uri: imageUri }} style={{ width: 200, height: 200 }} />
-			<ImageInput imageUri={imageUri} />
+			<ImageInput
+				imageUri={imageUri}
+				onChangeImage={(uri) => setImageUri(uri)}
+			/>
 		</Screen>
 	);
 }
