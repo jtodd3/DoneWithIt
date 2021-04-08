@@ -15,8 +15,12 @@ function WelcomeScreen(props) {
 				<Text style={styles.tagline}>Sell What You Don't Need</Text>
 			</View>
 			<View style={styles.buttonsContainer}>
-				<Button title="Login" />
-				<Button title="Register" color="secondary" />
+				<Button title="Login" onPress={() => navigation.navigate("Login")} />
+				<Button
+					title="Register"
+					color="secondary"
+					onPress={() => navigation.navigate("Register")}
+				/>
 			</View>
 		</ImageBackground>
 	);
