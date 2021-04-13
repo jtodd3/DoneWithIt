@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Image } from "react-native";
 import * as Yup from "yup";
+import jwtDecode from "jwt-decode";
 
 import authApi from "../api/auth";
 import Screen from "../components/Screen";
@@ -25,7 +26,8 @@ function LoginScreen(props) {
 			return setLoginFailed(true);
 		}
 		setLoginFailed(false);
-		console.log(result.data);
+		const user = jwtDecode(result.data);
+		console.log(user);
 	};
 
 	return (
