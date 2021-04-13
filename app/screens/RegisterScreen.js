@@ -15,9 +15,10 @@ const validationSchema = Yup.object().shape({
 });
 
 function RegisterScreen() {
+	const [error, setError] = useState();
+
 	const handleSubmit = async (userInfo) => {
 		const result = await usersApi.register(userInfo);
-		const [error, setError] = useState();
 
 		if (!result.ok) {
 			if (result.data) {
