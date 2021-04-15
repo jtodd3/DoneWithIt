@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import dayjs from "dayjs";
 
-import logger from "./app/utility/logger";
+import logger from "./logger";
 
 const prefix = "cache";
 const expiryInMinutes = 5;

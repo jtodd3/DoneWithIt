@@ -3,7 +3,7 @@ import cache from "../utility/cache";
 import authStorage from "../auth/storage";
 import settings from "../config/settings";
 
-const apiClient = requirecreate({
+const apiClient = create({
 	baseURL: settings.apiUrl,
 });
 
